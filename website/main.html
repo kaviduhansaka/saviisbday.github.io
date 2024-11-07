@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, baby boooo!</title>
+    <style>
+        /* Background and Text Styling */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ffdee9, #b5fffc);
+            margin: 0;
+            color: #4b2b3d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        h1 {
+            color: #ff69b4;
+            font-size: 3em;
+            margin-top: 40px;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: #d45087;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            text-align: center;
+            max-width: 600px;
+            padding: 0 15px;
+        }
+        
+        /* Container and Section Styling */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 800px;
+            margin: 20px;
+        }
+        .photo-section, .memories-section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            border: 2px dashed #ff69b4;
+        }
+        
+        /* Image Styling */
+        img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 3px solid #ff69b4;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Decorative Borders */
+        .ending-message {
+            font-size: 1.5em;
+            color: #ff6b6b;
+            margin: 30px 0;
+            padding: 0 15px;
+            border-top: 3px dotted #ff69b4;
+            padding-top: 20px;
+        }
+
+        /* Rose Animation */
+        .rose {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            opacity: 0.8;
+            animation: floatRoses 15s linear infinite;
+        }
+        .rose:nth-child(odd) { animation-duration: 12s; }
+        .rose:nth-child(even) { animation-duration: 18s; }
+
+        @keyframes floatRoses {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Keyframes and Responsive Styling */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Sparkle Effect */
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: gold;
+            border-radius: 50%;
+            animation: sparkleAnimation 2s linear infinite;
+        }
+
+        @keyframes sparkleAnimation {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Custom Notification (Modal) */
+        .notification-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #d45087;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            display: none;
+            z-index: 1000;
+            width: 80%;
+            max-width: 400px;
+            animation: modalFadeIn 1s ease forwards;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translate(-50%, -55%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        /* Button to Close Modal */
+        .close-btn {
+            background: #ff69b4;
+            border: none;
+            color: white;
+            font-size: 1em;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .close-btn:hover {
+            background: #ff92c9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 430px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 1.5em; }
+            p, .ending-message { font-size: 1em; }
+            img { max-width: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- New Notification Modal with Yes/No Buttons -->
+    <div id="loveQuestion" class="notification-modal">
+        <h2>Will you be my love forever? ❤️</h2>
+        <button class="close-btn" onclick="handleAnswer('yes')">Yes</button>
+        <button class="close-btn" onclick="handleAnswer('no')">No</button>
+    </div>
+
+    <!-- Original Birthday Notification -->
+    <div id="birthdayNotification" class="notification-modal">
+        <h2>Surprise! 🎉</h2>
+        <p>Happy Birthday, my baby boooooooo! May your day be filled with joy, love, and endless happiness.</p>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+
+    <!-- Rose Elements for Floating Animation -->
+    <div class="rose" style="left: 10%; animation-delay: 0s;"><img src="./image-removebg-preview (1).png" alt="Rose"></div>
+    <div class="rose" style="left: 30%; animation-delay: 3s;"><img src="./image-removebg-preview (1).png" alt="Rose"></div>
+    <div class="rose" style="left: 50%; animation-delay: 5s;"><img src="./image-removebg-preview (1).png" alt="Rose"></div>
+    <div class="rose" style="left: 70%; animation-delay: 2s;"><img src="./image-removebg-preview (1).png" alt="Rose"></div>
+    <div class="rose" style="left: 90%; animation-delay: 4s;"><img src="./image-removebg-preview (1).png" alt="Rose"></div>
+
+    <!-- Sparkles that will appear around the page -->
+    <div id="sparkleContainer"></div>
+
+    <h1>Happy Birthday, my baby booo! 🎉</h1>
+    <div class="container">
+        <!-- Photo Section -->
+        <div class="photo-section">
+            <h2>A Special Day for a Special Person</h2>
+            <p>Happy Birthday, rattharan! On this beautiful day, I just want to remind you how special you are to me. Thank you for being part of my life. without you i cant ever think a hanss in me ,, hope u understand how much i love u </p>
+            <img src="./WhatsApp Image 2024-11-07 at 23.26.03_8d72c7ca.jpg" alt="A memorable photo of you two">
+        </div>
+
+        <!-- Memories Section -->
+        <div class="memories-section">
+            <h2>Our Special Moments</h2>
+            <p>unfortunately i cant come and meett u for tdy im sorry for that my cutie piee.. hope thiis will add it up</p>
+            <img src="./sleep.jpg" alt="Memory 1">
+            <img src="./funny.jpg" alt="Memory 2">
+            <img src="./sleep1.jpg" alt="Memory 3">
+        </div>
+
+        <!-- Ending Message -->
+        <div class="ending-message">
+            Wishing you a day filled with love, laughter, and everything you enjoy. Happy Birthday! 🎂
+        </div>
+    </div>
+
+    <!-- JavaScript for Sparkle, Question, and Modal Functionality -->
+    <script>
+        // Display the love question modal first
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById("loveQuestion").style.display = "block";
+            }, 1000);
+        };
+
+        function handleAnswer(answer) {
+            document.getElementById("loveQuestion").style.display = "none";
+
+            if (answer === 'yes') {
+                alert("Okay then! 😊");
+            } else {
+                alert("Too bad, you're mine anyway! 😄");
+            }
+
+            // Show the birthday notification after 1 second
+            setTimeout(() => {
+                document.getElementById("birthdayNotification").style.display = "block";
+            }, 1000);
+        }
+
+        function closeModal() {
+            document.getElementById("birthdayNotification").style.display = "none";
+        }
+
+        // Optional: Code to add sparkles for a fun effect
+        const sparkleContainer = document.getElementById('sparkleContainer');
+        for (let i = 0; i < 50; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = `${Math.random() * 100}%`;
+            sparkle.style.top = `${Math.random() * 100}vh`;
+            sparkleContainer.appendChild(sparkle);
+        }
+    </script>
+
+</body>
+</html>
